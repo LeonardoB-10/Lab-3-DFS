@@ -8,7 +8,7 @@ En python los metodos de busqueda se puede asociar con la teoria de Grafos.
 Esta programa es un buen punto de partida si desea profundizar en la implementación de algoritmos relacionados con grafos.
 """
 
-class Graph:
+class Grafo:
     """
     Una clase que representa un Grafo
 
@@ -54,12 +54,31 @@ class Graph:
 		
         self.m_adj_list = {node: set() for node in self.m_nodes}# creamos la estructura de un diccionario de datos         
 	
+     #agregamos los parametros en la función agregando_borde
+    def agregando_borde(self, nodo1, node2, peso=1):#agregamos los parametros en la función agregando_borde
+        """Agrega un nuevo grafo
+        
+        Se pasa una llave como identificador para su posterior ingreso de valor
 
-    def agregando_borde(self, nodo1, node2, weight=1):#agregamos los parametros en la función agregando_borde
-        self.m_adj_list[nodo1].add((node2, weight))
+        Parametros
+        ----------
+        node1: int
+            valor del primer nodo 
+        node2: int
+            valor del segundo nodo
+        peso: int, valor por defecto 1
+            El peso de los grafos poderados
+
+        Si dirigido es falso devolvera True para ingresar como llave el nodo2 y su valor el nodo 1
+
+        Retorna
+        -------
+        Nada
+        """
+        self.m_adj_list[nodo1].add((node2, peso))
 
         if not self.m_directed:
-            self.m_adj_list[node2].add((nodo1, weight))
+            self.m_adj_list[node2].add((nodo1, peso))
     
 
     def imprimiendo_lista_adjuntada(self):
@@ -75,14 +94,14 @@ class Graph:
             print("node", key, ": ", self.m_adj_list[key])#Se imprmir el recorrido junto la llave y el valor
 
 
-    def dfs(self, start, target, path = [], visited = set()):
-        path.append(start)
-        visited.add(start)
-        if start == target:
+    def dfs(self, comienzo, objetivo, path = [], visitado = set()):
+        path.append(comienzo)
+        visitado.add(comienzo)
+        if comienzo == objetivo:
             return path
-        for (neighbour, weight) in self.m_adj_list[start]:
-            if neighbour not in visited:
-                result = self.dfs(neighbour, target, path, visited)
+        for (vecino, peso) in self.m_adj_list[comienzo]:
+            if vecino not in visitado:
+                result = self.dfs(vecino, objetivo, path, visitado)
                 if result is not None:
                     return result
         path.pop()
@@ -90,27 +109,29 @@ class Graph:
 
 
 if __name__ == "__main__":
-
-    graph = Graph(5, directed=False)
+    #### Programa principal #####
+    grafo = Grafo(5, directed=False)#Creamos una instancia de la clase Grafo con 5 nodos
 
  
-    graph.add_edge(0, 1)
-    graph.add_edge(0, 2)
-    graph.add_edge(1, 3)
-    graph.add_edge(2, 3)
-    graph.add_edge(3, 4)
+    grafo.add_edge(0, 1)
+    grafo.add_edge(0, 2)
+    grafo.add_edge(1, 3)
+    grafo.add_edge(2, 3)
+    grafo.add_edge(3, 4)
 
-    graph.print_adj_list()
+
+    # Imprmiendo la lista adyadencia con el formato nodo n: {(node, peso)}
+    grafo.print_adj_list()
 
     traversal_path = []
-    traversal_path = graph.dfs(0, 3)
-    print(f" The traversal path from node 0 to node 3 is {traversal_path}")
+    traversal_path = grafo.dfs(0, 3)
+    print(f" El camino transversal del nodo 0 al nodo 3 es {traversal_path}")
 
 
 
 
 # Execution Steps
-# Current Node	Path	Visited
+# Current Node	Path	visitado
 # 0	[0]	{0}
 # 1	[0, 1]	{0, 1}
 # 3	[0, 1, 3]	{0, 1, 3}
