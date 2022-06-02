@@ -97,13 +97,30 @@ class Grafo:
             # Se imprmir el recorrido junto la llave y el valor
             print("node", key, ": ", self.m_adjutando_list[key])
 
+    #parametros del metodo comienzo y objetivo
     def dfs(self, comienzo, objetivo, path=[], visitado=set()):
+        """_summary_
+
+        Args:
+            comienzo (_type_): _description_
+            objetivo (_type_): _description_
+            path (list, optional): _description_. Defaults to [].
+            visitado (_type_, optional): _description_. Defaults to set().
+
+        Returns:
+            _type_: _description_
+        """
+        
+        #agregamos un dato a la coleción de tipo arreglo
         path.append(comienzo)
+        #agregamos un dato a la coleción de tipo set
         visitado.add(comienzo)
+        #en caso que comienzo sea igual a objetivo
         if comienzo == objetivo:
-            return path
+            return path#retorna el arreglo
         for (vecino, peso) in self.m_adjutando_list[comienzo]:
-            if vecino not in visitado:
+            #recuperamos los valores del diccionario
+            if vecino not in visitado:#en caso que este visitado 
                 resultado = self.dfs(vecino, objetivo, path, visitado)
                 if resultado is not None:
                     return resultado
