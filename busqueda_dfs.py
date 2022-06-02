@@ -104,9 +104,9 @@ class Grafo:
             return path
         for (vecino, peso) in self.m_adjutando_list[comienzo]:
             if vecino not in visitado:
-                result = self.dfs(vecino, objetivo, path, visitado)
-                if result is not None:
-                    return result
+                resultado = self.dfs(vecino, objetivo, path, visitado)
+                if resultado is not None:
+                    return resultado
         path.pop()
         return None
 
