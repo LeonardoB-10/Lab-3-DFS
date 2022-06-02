@@ -121,14 +121,19 @@ class Grafo:
         for (vecino, peso) in self.m_adjutando_list[comienzo]:
             #recuperamos los valores del diccionario
             if vecino not in visitado:#en caso que este visitado 
+                #Método recursivo
                 resultado = self.dfs(vecino, objetivo, path, visitado)
-                if resultado is not None:
+                #Falta de valor 
+                if resultado is not None: 
+                    #retorna resultado
                     return resultado
+        #se quita elemento del indice
         path.pop()
-        return None
+        return None# Falta de valor 
 
 
 if __name__ == "__main__":
+
     #### Programa principal #####
     # Creamos una instancia de la clase Grafo con 5 nodos
     grafo = Grafo(5, dirigido=False)
