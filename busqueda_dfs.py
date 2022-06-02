@@ -1,5 +1,5 @@
-from queue import Queue #Importamos la libreria Queue
-#Implementa colas multiproductor y multiconsumo
+from queue import Queue  # Importamos la libreria Queue
+# Implementa colas multiproductor y multiconsumo
 
 """
 Autor: Borja Vinicio
@@ -7,6 +7,7 @@ Para iniciar con la generación de los métodos de busqueda se uso librerias
 En python los metodos de busqueda se puede asociar con la teoria de Grafos.
 Esta programa es un buen punto de partida si desea profundizar en la implementación de algoritmos relacionados con grafos.
 """
+
 
 class Grafo:
     """
@@ -34,8 +35,8 @@ class Grafo:
     bfs_traversal(self, nodo_inicio):
         Imprimir recorrido BFS
     """
-    
-    def __init__(self, num_of_nodes, directed=True):#Consstructor con sus parametros
+
+    def __init__(self, numero_de_nodos, dirigido=True):  # Consstructor con sus parametros
         """
         El constructor permite inicializar los atributos del grafo
 
@@ -47,17 +48,20 @@ class Grafo:
                 simetria del grafo 
 
         """
-        self.m_num_of_nodes = num_of_nodes#Inicializamos variable m_numero_de_nodos
-        self.m_nodes = range(self.m_num_of_nodes)#Inicializamos variable m_nodes 
-		
-        self.m_directed = directed#Inicializamos variable m_dirigido
-		
-        self.m_adj_list = {node: set() for node in self.m_nodes}# creamos la estructura de un diccionario de datos         
-	
-     #agregamos los parametros en la función agregando_borde
-    def agregando_borde(self, nodo1, node2, peso=1):#agregamos los parametros en la función agregando_borde
+        self.m_numero_de_nodos  = numero_de_nodos  # Inicializamos variable m_numero_de_nodos
+        # Inicializamos variable m_nodes
+        self.m_nodes = range(self.m_numero_de_nodos )
+
+        self.m_dirigido = dirigido  # Inicializamos variable m_dirigido
+
+        # creamos la estructura de un diccionario de datos
+        self.m_adjutando_list = {node: set() for node in self.m_nodes}
+
+     # agregamos los parametros en la función agregando_borde
+    # agregamos los parametros en la función agregando_borde
+    def agregando_borde(self, nodo1, node2, peso=1):
         """Agrega un nuevo grafo
-        
+
         Se pasa una llave como identificador para su posterior ingreso de valor
 
         Parametros
@@ -75,11 +79,10 @@ class Grafo:
         -------
         Nada
         """
-        self.m_adj_list[nodo1].add((node2, peso))
+        self.m_adjutando_list[nodo1].add((node2, peso))
 
-        if not self.m_directed:
-            self.m_adj_list[node2].add((nodo1, peso))
-    
+        if not self.m_dirigido:
+            self.m_adjutando_list[node2].add((nodo1, peso))
 
     def imprimiendo_lista_adjuntada(self):
         """Imprime el diccionario
@@ -89,17 +92,17 @@ class Grafo:
         -------
         Nada
         """
-        
-        for key in self.m_adj_list.keys():#Realizamos recorrido
-            print("node", key, ": ", self.m_adj_list[key])#Se imprmir el recorrido junto la llave y el valor
 
+        for key in self.m_adjutando_list.keys():  # Realizamos recorrido
+            # Se imprmir el recorrido junto la llave y el valor
+            print("node", key, ": ", self.m_adjutando_list[key])
 
-    def dfs(self, comienzo, objetivo, path = [], visitado = set()):
+    def dfs(self, comienzo, objetivo, path=[], visitado=set()):
         path.append(comienzo)
         visitado.add(comienzo)
         if comienzo == objetivo:
             return path
-        for (vecino, peso) in self.m_adj_list[comienzo]:
+        for (vecino, peso) in self.m_adjutando_list[comienzo]:
             if vecino not in visitado:
                 result = self.dfs(vecino, objetivo, path, visitado)
                 if result is not None:
@@ -110,24 +113,21 @@ class Grafo:
 
 if __name__ == "__main__":
     #### Programa principal #####
-    grafo = Grafo(5, directed=False)#Creamos una instancia de la clase Grafo con 5 nodos
+    # Creamos una instancia de la clase Grafo con 5 nodos
+    grafo = Grafo(5, dirigido=False)
 
- 
-    grafo.add_edge(0, 1)
-    grafo.add_edge(0, 2)
-    grafo.add_edge(1, 3)
-    grafo.add_edge(2, 3)
-    grafo.add_edge(3, 4)
-
+    grafo.agregando_borde(0, 1)
+    grafo.agregando_borde(0, 2)
+    grafo.agregando_borde(1, 3)
+    grafo.agregando_borde(2, 3)
+    grafo.agregando_borde(3, 4)
 
     # Imprmiendo la lista adyadencia con el formato nodo n: {(node, peso)}
-    grafo.print_adj_list()
+    grafo.imprimiendo_lista_adjuntada()
 
     traversal_path = []
     traversal_path = grafo.dfs(0, 3)
     print(f" El camino transversal del nodo 0 al nodo 3 es {traversal_path}")
-
-
 
 
 # Execution Steps
