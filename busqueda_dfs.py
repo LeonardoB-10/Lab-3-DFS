@@ -1,4 +1,12 @@
-from queue import Queue
+from queue import Queue #Importamos la libreria Queue
+#Implementa colas multiproductor y multiconsumo
+
+"""
+Autor: Borja Vinicio
+Para iniciar con la generación de los métodos de busqueda se uso librerias 
+En python los metodos de busqueda se puede asociar con la teoria de Grafos.
+Esta programa es un buen punto de partida si desea profundizar en la implementación de algoritmos relacionados con grafos.
+"""
 
 class Graph:
     """
@@ -39,12 +47,12 @@ class Graph:
                 simetria del grafo 
 
         """
-        self.m_num_of_nodes = num_of_nodes
-        self.m_nodes = range(self.m_num_of_nodes)
+        self.m_num_of_nodes = num_of_nodes#Inicializamos variable m_numero_de_nodos
+        self.m_nodes = range(self.m_num_of_nodes)#Inicializamos variable m_nodes 
 		
-        self.m_directed = directed
+        self.m_directed = directed#Inicializamos variable m_dirigido
 		
-        self.m_adj_list = {node: set() for node in self.m_nodes}      
+        self.m_adj_list = {node: set() for node in self.m_nodes}# creamos la estructura de un diccionario de datos         
 	
 
     def agregando_borde(self, nodo1, node2, weight=1):#agregamos los parametros en la función agregando_borde
@@ -63,8 +71,8 @@ class Graph:
         Nada
         """
         
-        for key in self.m_adj_list.keys():
-            print("node", key, ": ", self.m_adj_list[key])
+        for key in self.m_adj_list.keys():#Realizamos recorrido
+            print("node", key, ": ", self.m_adj_list[key])#Se imprmir el recorrido junto la llave y el valor
 
 
     def dfs(self, start, target, path = [], visited = set()):
